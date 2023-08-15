@@ -6,4 +6,4 @@ matplotlib
 squarify
 joblib
 tensorflow
-sklearn
+scikit-learn
