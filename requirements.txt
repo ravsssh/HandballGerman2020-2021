@@ -4,3 +4,6 @@ streamlit
 seaborn
 matplotlib
 squarify
+joblib
+tensorflow
+sklearn
