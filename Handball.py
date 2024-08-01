@@ -3,12 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
+
 color_palette = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
 
 st.set_page_config(
     page_title="Liqui Moly Handball 2021-2022 Statistic",
     page_icon=":man-playing-handball:"
 )
+
 df = pd.read_csv('Player.csv', delimiter=';')
 totalteam_df = df.groupby('Team')[['7M Goal', '7M Shot', '6M Goal', '6M Shot', '9M Goal', '9M Shot',
                                    'Wing Goal', 'Wing Shot', 'Pivot Goal', 'Pivot Shot', 'Fastbreak Goal',
@@ -50,6 +52,7 @@ plt.axhline(y=col_average, color='red', linestyle='--', linewidth=2, label='Aver
 plt.legend(loc='upper right')
 plt.tight_layout()
 st.pyplot(plt)
+
 df = pd.read_csv("Player.csv", delimiter=';')
 totalteam_df = df.groupby('Team')[['7M Goal', '7M Shot', '6M Goal', '6M Shot', '9M Goal', '9M Shot',
                                    'Wing Goal', 'Wing Shot', 'Pivot Goal', 'Pivot Shot', 'Fastbreak Goal',
@@ -57,7 +60,8 @@ totalteam_df = df.groupby('Team')[['7M Goal', '7M Shot', '6M Goal', '6M Shot', '
 noteam_df = totalteam_df.copy()
 if 'Team' in noteam_df.columns:
     noteam_df.drop('Team', axis=1, inplace=True)
-st.subheader("3 Highest Shot Attemp or Shot Goal In League :goal_net:")
+
+st.subheader("3 Highest Shot Attempt or Shot Goal In League :goal_net:")
 selected_type = st.selectbox('Select Shot Type', noteam_df.columns)
 top_three = totalteam_df[selected_type].nlargest(3)
 plt.figure(figsize=(8, 6))
@@ -68,5 +72,4 @@ for i, v in enumerate(top_three.values):
     ax.text(i, v, str(v), horizontalalignment='center', verticalalignment='bottom', fontweight='light')
 ax.set_xlabel('')
 plt.tight_layout()
-st.set_option('deprecation.showPyplotGlobalUse', False)
-st.pyplot()  
+st.pyplot()
